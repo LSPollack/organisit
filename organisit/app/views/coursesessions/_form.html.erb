@@ -1,0 +1,21 @@
+<%= form_for(@coursesession) do |f| %>
+  <% if @coursesession.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@coursesession.errors.count, "error") %> prohibited this coursesession from being saved:</h2>
+
+      <ul>
+      <% @coursesession.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :timeofday %><br>
+    <%= f.text_field :timeofday %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
