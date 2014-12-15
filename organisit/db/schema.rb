@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20141215162543) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "classrooms", force: true do |t|
     t.string   "name"
     t.string   "address"
@@ -57,8 +60,8 @@ ActiveRecord::Schema.define(version: 20141215162543) do
     t.string  "position"
   end
 
-  add_index "enrolments", ["course_id", "user_id"], name: "index_enrolments_on_course_id_and_user_id"
-  add_index "enrolments", ["user_id", "course_id"], name: "index_enrolments_on_user_id_and_course_id"
+  add_index "enrolments", ["course_id", "user_id"], name: "index_enrolments_on_course_id_and_user_id", using: :btree
+  add_index "enrolments", ["user_id", "course_id"], name: "index_enrolments_on_user_id_and_course_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -79,7 +82,7 @@ ActiveRecord::Schema.define(version: 20141215162543) do
     t.string   "last_sign_in_ip"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

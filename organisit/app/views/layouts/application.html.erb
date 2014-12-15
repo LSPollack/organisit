@@ -14,7 +14,6 @@
       <%= link_to "Log out", destroy_user_session_path, method: :delete %>
     <% else %>
       <%= link_to "Sign In", new_user_session_path %>
-      <%= link_to "Register", new_user_registration_path %>
     <% end %>
   </div>
 
@@ -23,7 +22,10 @@
 
   <ul>
 
-    <li><%= link_to 'Home', new_user_session_path%></li>
+    <li><%= link_to 'Home', static_pages_home_path%></li>
+    <li><%= link_to 'About', static_pages_about_path%></li>
+    <li><%= link_to 'Contact', static_pages_contact_path%></li>
+    <li><%= link_to 'Help', static_pages_help_path%></li>
 
     <%#= link_to 'Recipes', recipes_path if can? :index, Recipe %>
   </ul>
