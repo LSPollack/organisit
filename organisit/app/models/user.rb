@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  has_many :coures, through: :enrolments
+  has_many :enrolments
+  has_many :courses, through: :enrolments
+
 
 
 
@@ -10,5 +12,9 @@ class User < ActiveRecord::Base
   def role?(role_to_compare)
     self.role.to_s == role_to_compare.to_s
   end
+
+  # def instructors
+  #   Enrolment.where(position: "instructor")
+  # end
   
 end

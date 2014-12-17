@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   #before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_instructors, only: [:new, :edit, :update, :create]
   
   load_and_authorize_resource
   # GET /courses
@@ -68,8 +69,12 @@ class CoursesController < ApplicationController
       @course = Course.find(params[:id])
     end
 
+    def set_instructors
+      @instructors = User.where(canbeinstructor: true)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:title)
+      params.require(:course).permit(:title, :description, :code, :startdate, :enddate, :max_no_of_students, :category, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :mincoursesessions, :instructor_id, :classroom_id, {enrolments_attributes: [ :user_id, :position, :course_id, :id, :_destroy ] })
     end
 end

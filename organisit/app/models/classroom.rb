@@ -1,3 +1,3 @@
 class Classroom < ActiveRecord::Base
-  has_many :coursesessions
+  has_many :courses
 end

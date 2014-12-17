@@ -1,0 +1,14 @@
+<h2>Instructors</h2>
+<ul>
+  <% User.where(canbeinstructor: true).each do |instructor| %>
+  <li><%= instructor.name %><br><%= link_to 'Edit', edit_user_path(instructor) if can? :edit, instructor %></li>
+  <%end %>
+</ul><br><br>
+<h2>Students (aka non-instructors)</h2>
+<ul>
+  <% User.where(canbeinstructor: false).each do |noninstructor| %>
+  <li><%= noninstructor.name %><br><%= link_to 'Edit', edit_user_path(noninstructor) if can? :edit, noninstructor %></li>
+  <% end %>
+</ul><br><br>
+
+

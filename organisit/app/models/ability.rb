@@ -6,8 +6,10 @@ class Ability
       user ||= User.new
       if user.role? :staff
         can :manage, :all
+      elsif user.role? :student
+        # can :read, Course
       else
-        can :read, Course
+        # static pages only
       end
     end
 end

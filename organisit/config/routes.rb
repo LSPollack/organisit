@@ -5,12 +5,15 @@ Rails.application.routes.draw do
   get 'static_pages/help'
 
   resources :classrooms
-
   resources :coursesessions
+  resources :courses
+  resources :users
+  # resources :enrolments
+  delete '/enrolments/:id/delete', to: 'enrolments#destroy', as: :enrolment_delete
 
   devise_for :users
+
   root to: "static_pages#home"
-  resources :courses
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

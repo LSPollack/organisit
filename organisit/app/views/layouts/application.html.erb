@@ -20,15 +20,8 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
-  <ul>
-
-    <li><%= link_to 'Home', static_pages_home_path%></li>
-    <li><%= link_to 'About', static_pages_about_path%></li>
-    <li><%= link_to 'Contact', static_pages_contact_path%></li>
-    <li><%= link_to 'Help', static_pages_help_path%></li>
-
-    <%#= link_to 'Recipes', recipes_path if can? :index, Recipe %>
-  </ul>
+  <%= render partial: "layouts/publicnav" unless can? :index, Course %>
+  <%= render partial: "layouts/staffnav" if can? :index, Course %>
 
 <%= yield %>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215194439) do
+ActiveRecord::Schema.define(version: 20141217134800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20141215194439) do
     t.string   "address"
     t.string   "city"
     t.integer  "capacity"
-    t.integer  "coursesession_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,21 +36,17 @@ ActiveRecord::Schema.define(version: 20141215194439) do
     t.boolean  "monday"
     t.boolean  "tuesday"
     t.boolean  "wednesday"
-    t.boolean  "thurday"
     t.boolean  "friday"
     t.boolean  "saturday"
     t.boolean  "sunday"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "timeofday"
     t.integer  "mincoursesessions"
-  end
-
-  create_table "coursesessions", force: true do |t|
-    t.integer  "course_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "bookedtimeofday"
+    t.string   "thursday"
+    t.integer  "classroom_id"
+    t.boolean  "morning",            default: false
+    t.boolean  "afternoon",          default: false
+    t.boolean  "evening",            default: false
   end
 
   create_table "enrolments", id: false, force: true do |t|
@@ -70,16 +65,17 @@ ActiveRecord::Schema.define(version: 20141215194439) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.boolean  "canbeinstructor",        default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -1,0 +1,6 @@
+<br>
+<%= image_tag(@user.photo) %>
+<h3>Name: <%= @user.name %></h3>
+<p>Email: <%= @user.email %></p>
+<p><%= "Course instructor" if @user.canbeinstructor %></p>
+
