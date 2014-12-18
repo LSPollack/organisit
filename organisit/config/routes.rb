@@ -7,13 +7,16 @@ Rails.application.routes.draw do
   resources :classrooms
   resources :coursesessions
   resources :courses
-  resources :users
+  # Don't do this ever again with users. Like ever.
+  # resources :user
   # resources :enrolments
   delete '/enrolments/:id/delete', to: 'enrolments#destroy', as: :enrolment_delete
 
   devise_for :users
 
   root to: "static_pages#home"
+
+  resources :users, only: [:index, :show, :edit, :update] 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

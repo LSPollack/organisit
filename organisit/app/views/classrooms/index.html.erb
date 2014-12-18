@@ -1,25 +1,15 @@
-<h1>Listing classrooms</h1>
+<h2>Schedule for <%= Date.today.strftime("%b %-d, %Y") %></h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
+
+<h3>Manage classrooms</h1>
+  <ul>
     <% @classrooms.each do |classroom| %>
-      <tr>
-        <td><%= classroom.name %></td>
-        <td><%= link_to 'Show', classroom %></td>
-        <td><%= link_to 'Edit', edit_classroom_path(classroom) %></td>
-        <td><%= link_to 'Destroy', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <li><%= classroom.name %></li>
+    <%= link_to 'Show', classroom %> |
+    <%= link_to 'Edit', edit_classroom_path(classroom) %> |
+    <%= link_to 'Destroy', classroom, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
     <% end %>
-  </tbody>
-</table>
-
-<br>
+  </ul>
 
 <%= link_to 'New Classroom', new_classroom_path %>
