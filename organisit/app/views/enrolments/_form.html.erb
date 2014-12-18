@@ -1,1 +1,27 @@
-_form.html.erb
+<h3>Enrol a student</h3>
+<%= form_for(@enrolment) do |f| %>
+  <% if @enrolment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@enrolment.errors.count, "error") %> prohibited this enrolment from being saved:</h2>
+
+      <ul>
+      <% @enrolment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :course_id, 'Courses' %><br>
+    <%= f.collection_select(:course_id, Course.all, :id, :title, prompt: true) %><br><br>
+    <%= f.label :student_id, 'Students' %><br>
+    <%= f.collection_select(:user_id, User.all, :id, :name, prompt: true) %><br><br>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+  <% end %>
+

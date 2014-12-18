@@ -16,7 +16,7 @@
 </ul>
 
 
-<%= link_to 'Edit details', edit_course_path(@course) %> |
-<%= link_to 'Delete course', @course, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, @course%>
+<%= link_to 'Edit course details', edit_course_path(@course) %> |
+<%= link_to 'Manage Enrolment', new_enrolment_path %> | <%= link_to 'Delete course', @course, method: :delete, data: { confirm: 'Oh man, REALLY? I was totally looking forward to this!' } if can? :destroy, @course%>
 <br><br>
 <%= link_to 'Back to course listing', courses_path %>

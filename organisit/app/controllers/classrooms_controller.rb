@@ -1,20 +1,15 @@
 class ClassroomsController < ApplicationController
   before_action :set_classroom, only: [:show, :edit, :update, :destroy]
 
-  respond_to :html
-
   def index
     @classrooms = Classroom.all
-    respond_with(@classrooms)
   end
 
   def show
-    respond_with(@classroom)
   end
 
   def new
     @classroom = Classroom.new
-    respond_with(@classroom)
   end
 
   def edit
@@ -23,17 +18,17 @@ class ClassroomsController < ApplicationController
   def create
     @classroom = Classroom.new(classroom_params)
     @classroom.save
-    respond_with(@classroom)
+    redirect_to(classrooms_path)
   end
 
   def update
     @classroom.update(classroom_params)
-    respond_with(@classroom)
+    redirect_to(classrooms_path)
   end
 
   def destroy
     @classroom.destroy
-    respond_with(@classroom)
+    redirect_to(classrooms_path)
   end
 
   private

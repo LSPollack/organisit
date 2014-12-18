@@ -16,6 +16,17 @@ class Course < ActiveRecord::Base
 
   scope :with_students, -> { joins(:students).distinct }
 
+  validate :occurs_on_somedays? 
+  validates :title, :presence => { message: " - please give the course a title." } 
+  validates :category, :presence => { message: " - yes, naming stuff is hard, but suck it up and think of a category." } 
+  validates :description, :presence => { message: " - seriously? You don't know what the course is going to be about? Have a think..." } 
+  validates :startdate, :presence => { message: " - yeah, this is not happening unless you know when the course will start" }
+  validates :enddate, :presence => { message: " - what is this? The never-ending course? Um, no." } 
+  validates :max_no_of_students, :presence => { message: " - how many students do you think you can handle?" }
+  validates :classroom_id, :presence => { message: " - please select a classroom"}
+
+  validates_associated :instructor
+
   def self.current_courses
     adate = Date.today
     dayofweek = adate.strftime("%A").downcase
@@ -55,45 +66,58 @@ class Course < ActiveRecord::Base
 
 # Start with an empty string. Then, if Monday is true, then add "Monday" to the string. If also Tuesdays, then 
 
-def days_course_is_on
-  days = String.new
-  if (self.enddate - self.startdate) > 14
-    days = days + "Mondays " if self.monday
-    days = days + "Tuesdays " if self.tuesday
-    days = days + "Wednesdays " if self.wednesday
-    days = days + "Thursdays " if self.thursday
-    days = days + "Fridays " if self.friday
-    days = days + "Saturdays " if self.saturday
-    days = days + "Sundays " if self.sunday
-    days
-  else
-    days = days + "Monday " if self.monday
-    days = days + "Tuesday " if self.tuesday
-    days = days + "Wednesday " if self.wednesday
-    days = days + "Thursday " if self.thursday
-    days = days + "Friday " if self.friday
-    days = days + "Saturday " if self.saturday
-    days = days + "Sunday " if self.sunday
-    days
+  def days_course_is_on
+    days = String.new
+    if (self.enddate - self.startdate) > 14
+      days = days + "Mondays " if self.monday
+      days = days + "Tuesdays " if self.tuesday
+      days = days + "Wednesdays " if self.wednesday
+      days = days + "Thursdays " if self.thursday
+      days = days + "Fridays " if self.friday
+      days = days + "Saturdays " if self.saturday
+      days = days + "Sundays " if self.sunday
+      days
+    else
+      days = days + "Monday " if self.monday
+      days = days + "Tuesday " if self.tuesday
+      days = days + "Wednesday " if self.wednesday
+      days = days + "Thursday " if self.thursday
+      days = days + "Friday " if self.friday
+      days = days + "Saturday " if self.saturday
+      days = days + "Sunday " if self.sunday
+      days
+    end
   end
-end
 
-def timesofday_for_course
-  times = String.new
-  if (self.enddate - self.startdate) > 1
-    times = times + "Mornings " if self.morning
-    times = times + "Afternoons " if self.afternoon
-    times = times + "Evenings " if self.evening
-    times
-  else
-    times = times + "Morning " if self.morning
-    times = times + "Afternoon " if self.afternoon
-    times = times + "Evening " if self.evening
-    times
+  def timesofday_for_course
+    times = String.new
+    if (self.enddate - self.startdate) > 1
+      times = times + "Mornings " if self.morning
+      times = times + "Afternoons " if self.afternoon
+      times = times + "Evenings " if self.evening
+      times
+    else
+      times = times + "Morning " if self.morning
+      times = times + "Afternoon " if self.afternoon
+      times = times + "Evening " if self.evening
+      times
+    end
   end
-end
 
 
-accepts_nested_attributes_for :enrolments, allow_destroy: true
+  def occurs_on_somedays?
+    if ((monday == false || monday.nil?) &&
+    (tuesday == false || tuesday.nil?) &&
+    (wednesday == false || wednesday.nil?) &&
+    (thursday == false || thursday.nil?) &&
+    (friday == false || friday.nil?) &&
+    (saturday == false || saturday.nil?) &&
+    (sunday == false || sunday.nil?))
+      errors.add(:base, "A course cannot be saved unless the days of the week that it takes place on are entered. Please go back and select at least one day of the week.")
+    end
+  end
+
+
+  accepts_nested_attributes_for :enrolments, allow_destroy: true
 
 end

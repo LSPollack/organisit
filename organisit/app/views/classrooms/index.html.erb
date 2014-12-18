@@ -10,10 +10,14 @@
 <h3>Manage classrooms</h1>
   <ul>
     <% @classrooms.each do |classroom| %>
-    <li><%= classroom.name %></li>
-    <%= link_to 'Show', classroom %> |
-    <%= link_to 'Edit', edit_classroom_path(classroom) %> |
-    <%= link_to 'Destroy', classroom, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
+    <li>
+      <%= classroom.name %><br>
+      <%= classroom.address %><br>
+      <%= classroom.city %><br>
+      Capacity: <%= classroom.capacity %><br>
+    </li><br>
+    <%= link_to 'Edit name', edit_classroom_path(classroom) %> |
+    <%= link_to 'Remove', classroom, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
     <% end %>
   </ul>
 
