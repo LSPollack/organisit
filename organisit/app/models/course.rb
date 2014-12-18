@@ -1,5 +1,11 @@
 class Course < ActiveRecord::Base
   has_many :enrolments
+
+  # because there isn't a student_enrolments model, have to explicitly say to go look to Enrolment for this subset
+  has_many :student_enrolments, -> { where(enrolments: {position: "student"}) }, class_name: 'Enrolment'
+
+  has_many :students, :through => :student_enrolments, :source => :user
+
   has_many :users, through: :enrolments
   has_one :classroom
 
@@ -7,7 +13,21 @@ class Course < ActiveRecord::Base
   has_many :instructors, -> { where(enrolments: {position: "instructor"}) }, :through => :enrolments, :source => :user
   # this gives you instructor_ids, a collection of ids for those instructors
 
-  has_many :students, -> { where(enrolments: {position: "student"}) }, :through => :enrolments, :source => :user
+
+  scope :with_students, -> { joins(:students).distinct }
+
+  def self.current_courses
+    adate = Date.today
+    dayofweek = adate.strftime("%A").downcase
+    where("enddate > ? AND startdate <= ?", adate, adate)
+  end
+
+
+  def self.course_today
+    adate = Date.today
+    dayofweek = adate.strftime("%A").downcase
+    self.current_courses.where("#{dayofweek} = ?", true)
+  end
 
   #4 can get the instructor id as instructor is a user (via enrolments) but check if it's nil
   def instructor_id
@@ -35,9 +55,9 @@ class Course < ActiveRecord::Base
 
 # Start with an empty string. Then, if Monday is true, then add "Monday" to the string. If also Tuesdays, then 
 
-  def days_course_is_on
-    days = String.new
-    if (self.enddate - self.startdate) > 14
+def days_course_is_on
+  days = String.new
+  if (self.enddate - self.startdate) > 14
     days = days + "Mondays " if self.monday
     days = days + "Tuesdays " if self.tuesday
     days = days + "Wednesdays " if self.wednesday
@@ -46,7 +66,7 @@ class Course < ActiveRecord::Base
     days = days + "Saturdays " if self.saturday
     days = days + "Sundays " if self.sunday
     days
-    else
+  else
     days = days + "Monday " if self.monday
     days = days + "Tuesday " if self.tuesday
     days = days + "Wednesday " if self.wednesday
@@ -55,25 +75,25 @@ class Course < ActiveRecord::Base
     days = days + "Saturday " if self.saturday
     days = days + "Sunday " if self.sunday
     days
-    end
   end
+end
 
-  def timesofday_for_course
-    times = String.new
-    if (self.enddate - self.startdate) > 1
+def timesofday_for_course
+  times = String.new
+  if (self.enddate - self.startdate) > 1
     times = times + "Mornings " if self.morning
     times = times + "Afternoons " if self.afternoon
     times = times + "Evenings " if self.evening
     times
-    else
+  else
     times = times + "Morning " if self.morning
     times = times + "Afternoon " if self.afternoon
     times = times + "Evening " if self.evening
     times
-    end
   end
+end
 
 
-  accepts_nested_attributes_for :enrolments, allow_destroy: true
+accepts_nested_attributes_for :enrolments, allow_destroy: true
 
 end

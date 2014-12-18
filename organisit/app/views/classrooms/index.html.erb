@@ -1,6 +1,11 @@
 <h2>Schedule for <%= Date.today.strftime("%b %-d, %Y") %></h2>
 
-
+<ul>
+<% Course.course_today.each do |course| %>
+  <li><%= course.title %> (<%= course.timesofday_for_course.downcase.strip.singularize %>)<br>
+  Classroom: <%= Classroom.where(id: course.classroom_id).first.name %><br><%= link_to 'View course details', course %></li><br>
+<% end %><br><br>
+</ul>
 
 <h3>Manage classrooms</h1>
   <ul>

@@ -1,0 +1,15 @@
+<h3>Enrolled students</h3>
+<ul>
+  <% Course.with_students.each do |course| %>
+  <br><br>
+    <li><%= course.title %></li>
+    <% course.student_enrolments.each do |enrolment| %>
+      <p><%= enrolment.user.try :name %></p>
+      <%= link_to 'Remove', enrolment_delete_path(enrolment), method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, enrolment %>
+    <% end %>
+    <%#= link_to 'Edit enrolments', edit_enrolment_path(enrolment)  if can? :edit, enrolment %> 
+  <% end %>
+</ul>
+<br><br>
+<%= link_to 'New Enrolment', new_enrolment_path %>
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141217134800) do
+ActiveRecord::Schema.define(version: 20141218163542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,14 +42,14 @@ ActiveRecord::Schema.define(version: 20141217134800) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "mincoursesessions"
-    t.string   "thursday"
     t.integer  "classroom_id"
     t.boolean  "morning",            default: false
     t.boolean  "afternoon",          default: false
     t.boolean  "evening",            default: false
+    t.boolean  "thursday"
   end
 
-  create_table "enrolments", id: false, force: true do |t|
+  create_table "enrolments", force: true do |t|
     t.integer "user_id",   null: false
     t.integer "course_id", null: false
     t.string  "position"

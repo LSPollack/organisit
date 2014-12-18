@@ -1,4 +1,4 @@
-<br><br>
+<br>
 <h3><%= @course.category %></h3>
 <h1><%= @course.title %></h1>
 <p><%= @course.description %></p>
@@ -12,7 +12,6 @@
 <ul>
   <% @course.students.each do |student| %>
   <li><%= student.name %></li>
-  <%#= link_to 'Remove', enrolment_delete_path(@course.enrolments.where(user_id: student.id)), method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, @course %>
   <% end %>
 </ul>
 

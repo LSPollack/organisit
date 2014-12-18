@@ -58,9 +58,24 @@ end
     a.enddate = a.startdate + 3
     a.max_no_of_students = Faker::Number.digit
     a.category = "Programming"
-    a.mincoursesessions = 3
     a.afternoon = true
     a.classroom_id = Classroom.first.id
+    a.thursday = true
+    a.save!
+end
+
+3.times do |n|
+    a = Course.new
+    a.title = Faker::Hacker.adjective.capitalize + " " + Faker::Hacker.noun + " architecture"
+    a.description = Faker::Lorem.paragraph 
+    a.code = Faker::Address.building_number
+    a.startdate = Faker::Date.forward(5)
+    a.enddate = a.startdate + 3
+    a.max_no_of_students = Faker::Number.digit
+    a.category = "Advanced Programming"
+    a.afternoon = true
+    a.classroom_id = Classroom.offset(2).first.id
+    a.friday = true
     a.save!
 end
 

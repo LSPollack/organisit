@@ -7,9 +7,7 @@ Rails.application.routes.draw do
   resources :classrooms
   resources :coursesessions
   resources :courses
-  # Don't do this ever again with users. Like ever.
-  # resources :user
-  # resources :enrolments
+  resources :enrolments
   delete '/enrolments/:id/delete', to: 'enrolments#destroy', as: :enrolment_delete
 
   devise_for :users
