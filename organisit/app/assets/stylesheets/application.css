@@ -14,6 +14,16 @@
  *= require_self
  */
 
+ html {
+  padding-left: 15px;
+ }
+
+ body {
+   background: white url("crossword.png") repeat center;
+   font-family: Geneva;
+ }
+
+
 
 a {
   text-decoration: none;
@@ -22,15 +32,28 @@ a {
   padding: 5px;
 }
 
+a:visited, a:link {
+  color: black;
+}
+
+a:hover {
+  color: white;
+}
+
 nav {
-  margin-left: -40px;
+  margin-left: -50px;
 }
 
 nav a {
   text-decoration: none;
   background: lightblue;
   border-radius: 2px;
-  padding: 5px;
+  padding: 8px;
+}
+
+.login {
+  float: right;
+  margin-top: -45px;
 }
 
 nav li {
@@ -38,4 +61,10 @@ nav li {
   display: inline-block;
   padding: 10px;
 }
+
+header {
+  padding: 5px 0 10px 10px;
+}
+
+
 

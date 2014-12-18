@@ -1,4 +1,4 @@
-<br>
+<br><br>
 <h3><%= course.category %></h3>
 <h1><%= course.title %></h1>
 <p><%= course.description %></p>
@@ -6,6 +6,6 @@
 <p>Day(s): <%= course.days_course_is_on %></p>
 <p>Time(s) of day: <%= course.timesofday_for_course %></p>
 <%= link_to 'View full listing', course %>
-<%= link_to 'Edit above details', edit_course_path(course) if can? :edit, course %>
+<%= link_to 'Edit above details', edit_course_path(course) if can? :edit, course %><br>
 
 

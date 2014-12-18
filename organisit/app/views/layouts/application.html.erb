@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  
+  <header><h1>Michael's School of code</h1></header>
   <div class='login'>
     <% if current_user %>
       <%= current_user.email %>
@@ -16,8 +16,8 @@
       <%= link_to "Sign In", new_user_session_path %>
     <% end %>
   </div>
-  <br>
-  <hr>
+
+
 
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>

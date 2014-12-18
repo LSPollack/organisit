@@ -25,7 +25,7 @@ class Course < ActiveRecord::Base
   validates :max_no_of_students, :presence => { message: " - how many students do you think you can handle?" }
   validates :classroom_id, :presence => { message: " - please select a classroom"}
 
-  validates_associated :instructor
+  validate :instructor_present
 
   def self.current_courses
     adate = Date.today
@@ -104,6 +104,9 @@ class Course < ActiveRecord::Base
     end
   end
 
+  def instructor_present
+      errors.add :instructor, "must be present" unless instructors.any? || enrolments.detect{|e|e.position.to_s=='instructor'}
+  end
 
   def occurs_on_somedays?
     if ((monday == false || monday.nil?) &&

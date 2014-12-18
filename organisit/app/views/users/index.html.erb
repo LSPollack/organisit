@@ -1,13 +1,14 @@
+<p><em>"You put THIS in your view? REALLY?" – Michael Pavling</em></p><br>
 <h2>Instructors</h2>
 <ul>
-  <% @instructors.each do |instructor| %>
-  <li><%= instructor.name %><br><%= link_to 'Edit', edit_user_path(instructor) if can? :edit, instructor %></li>
+  <% @instructors.each do |instructor| %><br>
+  <li><%= instructor.name %><br><br><%= link_to 'Edit', edit_user_path(instructor) if can? :edit, instructor %></li>
   <%end %>
 </ul><br><br>
 <h2>Students (aka non-instructors)</h2>
 <ul>
-  <% @students.each do |noninstructor| %>
-  <li><%= noninstructor.name %><br><%= link_to 'Edit', edit_user_path(noninstructor) if can? :edit, noninstructor %></li>
+  <% @students.each do |noninstructor| %><br>
+  <li><%= noninstructor.name %><br><br><%= link_to 'Edit', edit_user_path(noninstructor) if can? :edit, noninstructor %></li>
   <% end %>
 </ul><br><br>
 
