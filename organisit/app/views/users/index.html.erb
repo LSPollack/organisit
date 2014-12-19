@@ -5,7 +5,7 @@
   <li><%= instructor.name %><br><br><%= link_to 'Edit', edit_user_path(instructor) if can? :edit, instructor %></li>
   <%end %>
 </ul><br><br>
-<h2>Students (aka non-instructors)</h2>
+<h2>Students</h2>
 <ul>
   <% @students.each do |noninstructor| %><br>
   <li><%= noninstructor.name %><br><br><%= link_to 'Edit', edit_user_path(noninstructor) if can? :edit, noninstructor %></li>

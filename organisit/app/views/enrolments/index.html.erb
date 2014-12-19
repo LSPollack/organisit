@@ -7,7 +7,7 @@
     <ol>
     <% course.student_enrolments.each do |enrolment| %>
       <li><p><%= enrolment.user.try :name %></p>
-      <%= link_to 'Remove', enrolment_delete_path(enrolment), method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, enrolment %></li>
+      <%= link_to 'Remove', enrolment_delete_path(enrolment), method: :delete, data: { confirm: 'Oh is that how it is? Whatever...' } if can? :destroy, enrolment %></li>
     <% end %>
     </ol>
     <%#= link_to 'Edit enrolments', edit_enrolment_path(enrolment)  if can? :edit, enrolment %> 
